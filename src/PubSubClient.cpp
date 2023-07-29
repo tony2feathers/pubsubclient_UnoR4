@@ -610,7 +610,12 @@ boolean PubSubClient::subscribe(const char* topic) {
 }
 
 boolean PubSubClient::subscribe(const char* topic, uint8_t qos) {
-    size_t topicLength = strnlen(topic, this->bufferSize);
+    	size_t topicLength;
+	if(topic == nullptr){
+		topicLength = 0;
+	} else {
+	topicLength = strnlen(topic, this->bufferSize);
+	}
     if (topic == 0) {
         return false;
     }
@@ -638,7 +643,12 @@ boolean PubSubClient::subscribe(const char* topic, uint8_t qos) {
 }
 
 boolean PubSubClient::unsubscribe(const char* topic) {
-	size_t topicLength = strnlen(topic, this->bufferSize);
+	size_t topicLength;
+	if(topic == nullptr){
+		topicLength = 0;
+	} else {
+	topicLength = strnlen(topic, this->bufferSize);
+	}
     if (topic == 0) {
         return false;
     }
