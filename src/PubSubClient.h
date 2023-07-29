@@ -15,6 +15,9 @@
 #define MQTT_VERSION_3_1      3
 #define MQTT_VERSION_3_1_1    4
 
+// alias for strnlen to strlen to ensure compatibility with Renesas architecture
+#define strnlen(s, cnt)  strlen(s)
+
 // MQTT_VERSION : Pick the version
 //#define MQTT_VERSION MQTT_VERSION_3_1
 #ifndef MQTT_VERSION
@@ -83,7 +86,8 @@
 #define MQTT_CALLBACK_SIGNATURE void (*callback)(char*, uint8_t*, unsigned int)
 #endif
 
-#define CHECK_STRING_LENGTH(l,s) if (l+2+strnlen(s, this->bufferSize) > this->bufferSize) {_client->stop();return false;}
+#define CHECK_STRING_LENGTH(l, s) if (l + 2 + strlen(s) > this->bufferSize) { _client->stop(); return false; }
+
 
 class PubSubClient : public Print {
 private:
